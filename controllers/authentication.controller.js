@@ -24,7 +24,7 @@ async function signup(req,res,next){
         const new_user = new userModel({...req.body});
         const data = await new_user.save();
         console.log(data);
-        res.status(200).send({token : getToken(new54user)});
+        res.status(200).send({token : getToken(new_user)});
     }else{
         res.status(422).send({error:"Email is in use"});
     }

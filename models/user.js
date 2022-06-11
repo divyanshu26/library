@@ -17,7 +17,7 @@ userSchema.pre('save',function(next){
         
         if(err)return next(err);
         console.log(salt);
-        bcrypt.hash(user.password,salt , function(err, hash){
+        bcrypt.hash(user.password,salt   , function(err, hash){
             if(err) return next(err);
             console.log('pre');
             user.password  =  hash;
@@ -30,7 +30,13 @@ userSchema.pre('save',function(next){
 
 //Create model class
 
+userSchema.methods.comparePassword = (candidatePassword, callback)=>{
+    bcrypt.compare(candidatePassword,this.password,(err,isMatch)=>{
+        if(err)return callback(err);
 
+        callback(null,isMatch); 
+    })
+}
 
 const ModelClass = mongoose.model('user', userSchema);
 
