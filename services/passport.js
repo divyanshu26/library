@@ -13,6 +13,7 @@ const localLogin = new LocalStrategy(localOptions,(email,password,done)=>{
         if(err)return done(err,false);
 
         if(user){
+            //console.log('inside passport ',user);
             user.comparePassword(password,(err,isMatch)=>{
                 if(err) return done(err);
 
@@ -36,7 +37,7 @@ const jwtLogin = new JwtStrategy(jwtOptions,(payload,done)=>{
         if(err)return done(err,false);
 
         if(user){
-            
+            console.log(user.email,'user was found');
             done(null,user);
         }else{
             done(null,false);

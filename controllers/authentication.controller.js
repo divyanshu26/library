@@ -1,7 +1,9 @@
 exports.signup = signup;
+exports.signIn = signIn;
 const userModel = require('../models/user');
 const jwt = require('jwt-simple');
 const config = require('../config');
+
 
 
 function getToken(user){
@@ -10,6 +12,7 @@ function getToken(user){
 };
 
 async function signup(req,res,next){
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%',req.body);
     try{
         const email = req.body.email;
     const password = req.body.password;
@@ -31,4 +34,10 @@ async function signup(req,res,next){
     }catch(err){
         console.log('sdfdsfg',err);
     };
+};
+
+
+async function signIn(req,res,next){
+    console.log('sign in func');
+    res.status(200).send({token:getToken(req.user)});
 };

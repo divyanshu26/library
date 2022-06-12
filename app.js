@@ -12,7 +12,7 @@ var app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use((req,res,next)=>{
-  console.log(req.body);
+  console.log(req.body,'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%',req.url);
   next();
 });
 app.use(bodyParser.json());
@@ -67,7 +67,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send('error');
+  res.send({'error':'resource not found'});
 });
 
 module.exports = app;

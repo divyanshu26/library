@@ -30,8 +30,10 @@ userSchema.pre('save',function(next){
 
 //Create model class
 
-userSchema.methods.comparePassword = (candidatePassword, callback)=>{
+userSchema.methods.comparePassword = function(candidatePassword, callback){
+    //console.log(this,'passport################################',candidatePassword)
     bcrypt.compare(candidatePassword,this.password,(err,isMatch)=>{
+        
         if(err)return callback(err);
 
         callback(null,isMatch); 
